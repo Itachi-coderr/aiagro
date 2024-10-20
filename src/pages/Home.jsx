@@ -4,23 +4,7 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500">
-      {/* Navbar */}
-      {/* <header className="bg-white shadow-md">
-        <div className="container mx-auto p-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl md:text-4xl font-bold text-green-700">
-              AgroAI - Smart Farming Assistant
-            </h1>
-          </div>
-          <nav className="space-x-4">
-            <Link to="/" className="text-lg text-black hover:text-green-600 transition duration-300">Home</Link>
-            <Link to="/chatbot" className="text-lg text-black hover:text-green-600 transition duration-300">Chatbot</Link>
-            <Link to="/weather-advice" className="text-lg text-black hover:text-green-600 transition duration-300">Weather Advice</Link>
-            <Link to="/disease-diagnosis" className="text-lg text-black hover:text-green-600 transition duration-300">Disease Diagnosis</Link>
-          </nav>
-        </div>
-      </header> */}
-
+      
       {/* Main Section */}
       <main className="container mx-auto flex flex-col md:flex-row items-center justify-center p-10 text-center md:text-left">
         <div className="w-full md:w-1/2 space-y-6">
@@ -48,24 +32,24 @@ const HomePage = () => {
         <div className="container mx-auto text-center space-y-12">
           <h3 className="text-3xl font-bold text-green-700">Why Choose AgroAI?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="bg-green-50 p-8 rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
+            <Link to="/chatbot" className="block bg-green-50 p-8 rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
               <h4 className="text-2xl font-semibold text-green-700">AI-Powered Chatbot</h4>
               <p className="mt-4 text-black">
                 Get real-time advice tailored to your crop needs. Just ask our intelligent chatbot powered by LLaMA 3.2!
               </p>
-            </div>
-            <div className="bg-green-50 p-8 rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
+            </Link>
+            <Link to="/weather" className="block bg-green-50 p-8 rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
               <h4 className="text-2xl font-semibold text-green-700">Weather-Based Crop Advice</h4>
               <p className="mt-4 text-black">
                 Know which crops thrive in your local climate and adjust your planting strategies accordingly for optimal results.
               </p>
-            </div>
-            <div className="bg-green-50 p-8 rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
+            </Link>
+            <Link to="/diagnosis" className="block bg-green-50 p-8 rounded-lg shadow-lg hover:bg-green-100 transition duration-300">
               <h4 className="text-2xl font-semibold text-green-700">Disease Diagnosis</h4>
               <p className="mt-4 text-black">
                 Upload an image of your crop and let our AI diagnose any diseases with suggestions for the next steps.
               </p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
