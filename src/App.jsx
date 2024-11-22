@@ -59,7 +59,7 @@ function App() {
           </div>
         </header>
 
-        <main className="p-4">
+        <main className="">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/chatbot" element={<Chatbot />} />
