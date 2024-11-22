@@ -20,14 +20,14 @@ function App() {
             <h1 className="text-2xl font-bold">AgroAI</h1>
 
             {/* Navbar links */}
-            <nav className="hidden md:flex space-x-12 ml-auto px-2">
+            <nav className="hidden md:flex space-x-12 ml-auto">
               <Link to="/" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Home</Link>
               <Link to="/chatbot" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Chatbot</Link>
               <Link to="/weather" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Crops Details</Link>
               <Link to="/diagnosis" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Disease Diagnosis</Link>
               <Link to="/locationBasedRecommendation" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Location-Based Crops Advice</Link>
             </nav>
-
+          
             {/* Mobile menu button */}
             <button onClick={toggleMenu} className="block md:hidden text-white focus:outline-none">
               <svg
@@ -48,7 +48,7 @@ function App() {
           </div>
 
           {/* Mobile menu dropdown */}
-          <div className={`${menuOpen ? 'block' : 'hidden'} md:hidden bg-gray-700 mt-2`}>
+          <div className={`${menuOpen ? 'block' : 'hidden'} md:hidden bg-gray-700 mt-2 px-2`}>
             <nav className="flex flex-col space-y-2 p-4">
               <Link to="/" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110" onClick={toggleMenu}>Home</Link>
               <Link to="/chatbot" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110" onClick={toggleMenu}>Chatbot</Link>
