@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div>
         <header className="py-4 bg-gray-800 text-white">
-          <div className="container mx-auto flex justify-between items-center">
+          <div className="container mx-auto flex justify-between items-center px-2">
             {/* Simplified AgroAI title */}
             <h1 className="text-2xl font-bold">AgroAI</h1>
 
