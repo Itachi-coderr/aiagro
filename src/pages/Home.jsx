@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500 px-2">
+    <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500 ">
       {/* Main Section */}
       <main className="container mx-auto flex flex-col md:flex-row items-center justify-center p-6 sm:p-10 text-center md:text-left">
         <div className="w-full md:w-1/2 space-y-4 sm:space-y-6">
@@ -27,7 +27,7 @@ const HomePage = () => {
       </main>
 
       {/* Features Section */}
-      <section className="bg-white py-12 sm:py-16">
+      <section className="bg-white py-12 sm:py-16 px-2">
         <div className="container mx-auto text-center space-y-8 sm:space-y-12">
           <h3 className="text-2xl sm:text-3xl font-bold text-green-700">
             Why Choose AgroAI?
