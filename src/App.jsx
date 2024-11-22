@@ -14,7 +14,7 @@ function App() {
   return (
     <Router>
       <div>
-        <header className="p-4 bg-gray-800 text-white">
+        <header className="bg-gray-800 text-white">
           <div className="container mx-auto flex justify-between items-center">
             {/* Simplified AgroAI title */}
             <h1 className="text-2xl font-bold">AgroAI</h1>
