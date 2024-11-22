@@ -29,7 +29,7 @@ function App() {
             </nav>
           
             {/* Mobile menu button */}
-            <button onClick={toggleMenu} className="block md:hidden text-white focus:outline-none">
+            <button onClick={toggleMenu} className="block md:hidden text-white focus:outline-none px-2">
               <svg
                 className="w-6 h-6"
                 fill="none"
