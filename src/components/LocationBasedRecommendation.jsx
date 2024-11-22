@@ -94,24 +94,24 @@ const AutoLocationCropRecommendation = () => {
     if (!location || location === "Location not found.") {
       setLocation("Lahore");
     }
-
+  
     setLoading(true);
     setAiResponse("");
-
+  
     try {
       const chatCompletion = await groq.chat.completions.create({
         model: "llama-3.2-90b-vision-preview",
         messages: [
           {
             role: "user",
-            content: `Given the location: ${location}, recommend suitable fruits and vegetables for cultivation in ${selectedLanguage.value}. Provide concise names and helpful information.`,
+            content: `Given the location: ${location}, recommend suitable fruits and vegetables for cultivation. Provide your response entirely in ${selectedLanguage.value}. Provide concise names and helpful information.`,
           },
         ],
         temperature: 0.5,
         max_tokens: 500,
         top_p: 1,
       });
-
+  
       const responseText = chatCompletion.choices[0].message.content;
       setAiResponse(responseText);
     } catch (error) {
@@ -121,6 +121,7 @@ const AutoLocationCropRecommendation = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gradient-to-r from-green-200 via-green-400 to-green-600 p-6">
