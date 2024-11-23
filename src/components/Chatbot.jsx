@@ -27,7 +27,7 @@ const Chatbot = () => {
         messages: [
           {
             role: "user",
-            content: `User asked: "${userInput}". Give a short, useful answer without unnecessary headings.`,
+            content: `User asked: "${userInput}". Give a short, useful answer without unnecessary headings and also user ask Agro related questions.`,
           },
         ],
         temperature: 0.7,
@@ -67,16 +67,14 @@ const Chatbot = () => {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex ${
-                msg.sender === "user" ? "justify-end" : "justify-start"
-              }`}
+              className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"
+                }`}
             >
               <div
-                className={`px-3 py-2 max-w-[80%] rounded-2xl shadow ${
-                  msg.sender === "user"
+                className={`px-3 py-2 max-w-[80%] rounded-2xl shadow ${msg.sender === "user"
                     ? "bg-gradient-to-r from-green-500 to-green-700 text-white"
                     : "bg-gray-300 text-gray-800"
-                } text-xs md:text-sm`}
+                  } text-xs md:text-sm`}
               >
                 {msg.sender === "ai" ? (
                   <ReactMarkdown

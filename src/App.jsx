@@ -17,7 +17,7 @@ function App() {
         <header className="py-4 bg-gray-800 text-white">
           <div className="container mx-auto flex justify-between items-center px-2">
             {/* Simplified AgroAI title */}
-            <h1 className="text-2xl font-bold">AgroAI</h1>
+            <Link className="text-2xl font-bold" to="/">AgroAI</Link>
 
             {/* Navbar links */}
             <nav className="hidden md:flex space-x-12 ml-auto">
@@ -27,7 +27,7 @@ function App() {
               <Link to="/diagnosis" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Disease Diagnosis</Link>
               <Link to="/locationBasedRecommendation" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Location-Based Crops Advice</Link>
             </nav>
-          
+
             {/* Mobile menu button */}
             <button onClick={toggleMenu} className="block md:hidden text-white focus:outline-none px-2">
               <svg

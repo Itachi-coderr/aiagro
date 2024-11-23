@@ -75,7 +75,7 @@ const DiseaseDiagnosis = () => {
         messages: [
           {
             role: "user",
-            content: `The crop is a ${fruitName}, diagnosed with ${disease}. Provide a short, practical treatment suggestion in ${selectedLanguage.value}. Limit the response to 100 words.`,
+            content: `The crop is a ${fruitName}, diagnosed with ${disease}. Provide a short, practical treatment or suggest medicine suggestion in ${selectedLanguage.value}. Limit the response to 100 words.`,
           },
         ],
         temperature: 0.7,

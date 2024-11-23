@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  ChatBubbleOvalLeftEllipsisIcon,
+  CloudIcon,
+  ShieldCheckIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/solid";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500 ">
+    <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500">
       {/* Main Section */}
       <main className="container mx-auto flex flex-col md:flex-row items-center justify-center p-6 sm:p-10 text-center md:text-left">
         <div className="w-full md:w-1/2 space-y-4 sm:space-y-6">
@@ -30,14 +36,15 @@ const HomePage = () => {
       <section className="bg-white py-12 sm:py-16 px-2">
         <div className="container mx-auto text-center space-y-8 sm:space-y-12">
           <h3 className="text-2xl sm:text-3xl font-bold text-green-700">
-            Why Choose AgroAI?
+            Try Our Services
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <Link
               to="/chatbot"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:bg-green-100 transition duration-300"
+              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
             >
-              <h4 className="text-lg sm:text-xl font-semibold text-green-700">
+              <ChatBubbleOvalLeftEllipsisIcon className="w-12 h-12 text-green-600 mx-auto" />
+              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
                 AI-Powered Chatbot
               </h4>
               <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
@@ -46,9 +53,10 @@ const HomePage = () => {
             </Link>
             <Link
               to="/weather"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:bg-green-100 transition duration-300"
+              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
             >
-              <h4 className="text-lg sm:text-xl font-semibold text-green-700">
+              <CloudIcon className="w-12 h-12 text-green-600 mx-auto" />
+              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
                 Weather-Based Crop Advice
               </h4>
               <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
@@ -57,9 +65,10 @@ const HomePage = () => {
             </Link>
             <Link
               to="/diagnosis"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:bg-green-100 transition duration-300"
+              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
             >
-              <h4 className="text-lg sm:text-xl font-semibold text-green-700">
+              <ShieldCheckIcon className="w-12 h-12 text-green-600 mx-auto" />
+              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
                 Disease Diagnosis
               </h4>
               <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
@@ -68,9 +77,10 @@ const HomePage = () => {
             </Link>
             <Link
               to="/locationBasedRecommendation"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:bg-green-100 transition duration-300"
+              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
             >
-              <h4 className="text-lg sm:text-xl font-semibold text-green-700">
+              <MapPinIcon className="w-12 h-12 text-green-600 mx-auto" />
+              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
                 Location-Based Crop Advice
               </h4>
               <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
