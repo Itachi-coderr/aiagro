@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   ChatBubbleOvalLeftEllipsisIcon,
@@ -8,6 +8,14 @@ import {
 } from "@heroicons/react/24/solid";
 
 const HomePage = () => {
+  // Create a ref for the "Try Our Services" section
+  const servicesRef = useRef(null);
+
+  // Function to scroll to the "Try Our Services" section
+  const scrollToServices = () => {
+    servicesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500">
       {/* Main Section with Image Background */}
@@ -22,7 +30,7 @@ const HomePage = () => {
   <div className="absolute inset-0 bg-black opacity-40"></div>
 
   {/* Content */}
-  <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white">
+  <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white bottom-5">
     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
       Revolutionize Your Farming Experience with AgroAI
     </h2>
@@ -33,11 +41,25 @@ const HomePage = () => {
       Get personalized advice, diagnose diseases, and optimize your yield using cutting-edge technology. With AgroAI, sustainable farming is at your fingertips.
     </p>
   </div>
+
+  {/* Explore More Button */}
+  <div className="absolute bottom-40 w-full text-center">
+    <button
+      onClick={scrollToServices}
+      className="px-6 py-3 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-900 transition duration-300"
+    >
+      Explore More
+    </button>
+  </div>
 </main>
 
 
-      {/* Features Section */}
-      <section className="bg-white py-12 sm:py-16 px-2">
+
+      {/* Features Section (Try Our Services) */}
+      <section
+        ref={servicesRef}
+        className="bg-white py-12 sm:py-16 px-2"
+      >
         <div className="container mx-auto text-center space-y-8 sm:space-y-12">
           <h3 className="text-2xl sm:text-3xl font-bold text-green-700">
             Try Our Services
@@ -54,22 +76,19 @@ const HomePage = () => {
                 to: "/weather",
                 Icon: CloudIcon,
                 title: "Weather-Based Crop Advice",
-                description:
-                  "Know which crops thrive in your local climate.",
+                description: "Know which crops thrive in your local climate.",
               },
               {
                 to: "/diagnosis",
                 Icon: ShieldCheckIcon,
                 title: "Disease Diagnosis",
-                description:
-                  "Upload an image to diagnose crop diseases.",
+                description: "Upload an image to diagnose crop diseases.",
               },
               {
                 to: "/locationBasedRecommendation",
                 Icon: MapPinIcon,
                 title: "Location-Based Crop Advice",
-                description:
-                  "Get recommendations based on your location.",
+                description: "Get recommendations based on your location.",
               },
             ].map((feature, index) => (
               <Link
