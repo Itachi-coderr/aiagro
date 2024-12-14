@@ -21,34 +21,15 @@ const DiseaseDiagnosis = () => {
   // Supported languages with labels for react-select
   const languages = [
     { value: "English", label: "English" },
-    { value: "Urdu", label: "Urdu (اردو)" },
-    { value: "Punjabi", label: "Punjabi (پنجابی)" },
-    { value: "Sindhi", label: "Sindhi (سنڌي)" },
-    { value: "Pashto", label: "Pashto (پښتو)" },
-    { value: "Balochi", label: "Balochi (بلوچی)" },
-    { value: "Saraiki", label: "Saraiki (سرائیکی)" },
-    { value: "Arabic", label: "Arabic (العربية)" },
-    { value: "Hindi", label: "Hindi (हिन्दी)" },
-    { value: "Bengali", label: "Bengali (বাংলা)" },
-    { value: "French", label: "French (Français)" },
-    { value: "German", label: "German (Deutsch)" },
-    { value: "Chinese (Simplified)", label: "Chinese (Simplified) (简体中文)" },
-    { value: "Chinese (Traditional)", label: "Chinese (Traditional) (繁體中文)" },
-    { value: "Spanish", label: "Spanish (Español)" },
-    { value: "Portuguese", label: "Portuguese (Português)" },
-    { value: "Russian", label: "Russian (Русский)" },
-    { value: "Turkish", label: "Turkish (Türkçe)" },
-    { value: "Persian", label: "Persian (فارسی)" },
-    { value: "Malay", label: "Malay (Bahasa Melayu)" },
-    { value: "Tamil", label: "Tamil (தமிழ்)" },
-    { value: "Telugu", label: "Telugu (తెలుగు)" },
-    { value: "Korean", label: "Korean (한국어)" },
-    { value: "Japanese", label: "Japanese (日本語)" },
-    { value: "Italian", label: "Italian (Italiano)" },
-    { value: "Swahili", label: "Swahili (Kiswahili)" },
-    { value: "Dutch", label: "Dutch (Nederlands)" },
-    { value: "Thai", label: "Thai (ไทย)" },
-    { value: "Vietnamese", label: "Vietnamese (Tiếng Việt)" },
+    { value: "Urdu", label: "Urdu (\u0627\u0631\u062f\u0648)" },
+    { value: "Punjabi", label: "Punjabi (\u067e\u0646\u062c\u0627\u0628\u06cc)" },
+    { value: "Sindhi", label: "Sindhi (\u0633\u0646\u068c\u064a)" },
+    { value: "Pashto", label: "Pashto (\u067e\u069a\u062a\u0648)" },
+    { value: "Balochi", label: "Balochi (\u0628\u0644\u0648\u0686\u06cc)" },
+    { value: "Spanish", label: "Spanish (Espa\u00f1ol)" },
+    { value: "French", label: "French (Fran\u00e7ais)" },
+    { value: "Chinese", label: "Chinese (\u7b80\u4f53\u4e2d\u6587)" },
+    // Add more languages as needed
   ];
 
   // Drag and drop setup
@@ -57,10 +38,18 @@ const DiseaseDiagnosis = () => {
     accept: "image/*",
   });
 
-  // Simulate Image Recognition API call
+  // Simulated Image Recognition API call with additional diseases
   const analyzeImage = async (image) => {
-    const mockDisease = "Powdery mildew"; // Simulating a recognized disease
-    return mockDisease;
+    const diseases = [
+      "Powdery mildew",
+      "Leaf spot",
+      "Root rot",
+      "Anthracnose",
+      "Blight",
+      "Rust disease",
+    ];
+    const randomIndex = Math.floor(Math.random() * diseases.length);
+    return diseases[randomIndex]; // Simulate detecting a random disease
   };
 
   const handleSubmit = async () => {
@@ -75,7 +64,7 @@ const DiseaseDiagnosis = () => {
         messages: [
           {
             role: "user",
-            content: `The crop is a ${fruitName}, diagnosed with ${disease}. Provide a short, practical treatment or suggest medicine suggestion in ${selectedLanguage.value}. Limit the response to 100 words.`,
+            content: `The crop is a ${fruitName}, diagnosed with ${disease}. Provide a short, practical treatment suggestion in ${selectedLanguage.value}. Limit the response to 100 words.`,
           },
         ],
         temperature: 0.7,
