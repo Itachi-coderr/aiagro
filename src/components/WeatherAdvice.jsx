@@ -80,52 +80,43 @@ const WeatherAdvice = () => {
         messages: [
           {
             role: "user",
-            content: `Provide details for the crop "${userInput}" in ${selectedLanguage.value} in the following structured format:
-          {
-            "name": "Name of the crop",
-            "weather": "Optimal weather",
-            "benefits": "List of benefits",
-            "description": "Description of the crop"
-          }
-          Only provide this structured format without any additional text.`,
+            content: `You are an assistant providing multilingual crop details. For the crop "${userInput}", return ONLY a JSON response in the following format (without any extra text or comments):
+            {
+              "name": "Name of the crop (translated into ${selectedLanguage.value})",
+              "weather": "Optimal weather (translated into ${selectedLanguage.value})",
+              "benefits": "List of benefits (translated into ${selectedLanguage.value})",
+              "description": "Description of the crop (translated into ${selectedLanguage.value})"
+            }
+            If ${selectedLanguage.value} is not 'English', provide the crop name in English as 'image_query'.`,
           },
         ],
         temperature: 0.7,
-        max_tokens: 200,
+        max_tokens: 700, // Increased max tokens for longer responses
         top_p: 1,
         stream: false,
       });
 
-      const aiResponse = chatCompletion.choices[0].message.content.trim();
+      let aiResponse = chatCompletion.choices[0]?.message?.content?.trim();
 
-      try {
-        // Ensure the response is valid JSON
-        const parsedResponse = parseJsonSafely(aiResponse);
-
-        if (parsedResponse && parsedResponse.name && parsedResponse.weather && parsedResponse.benefits && parsedResponse.description) {
-          const imageUrl = await fetchImage(parsedResponse.name);
-          setCropDetails({ ...parsedResponse, image: imageUrl });
-        } else {
-          throw new Error("Incomplete data in the response");
-        }
-      } catch (err) {
-        console.error("Failed to parse AI response:", aiResponse);
-        setError("Failed to parse AI response. Please try again or refine your query.");
+      // Step 1: Clean and extract JSON using regex
+      const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error("Invalid response format. No JSON detected.");
       }
+
+      const cleanedJSON = jsonMatch[0];
+      const parsedResponse = JSON.parse(cleanedJSON);
+
+      // Step 2: Handle image fetch for other languages
+      let imageQuery = parsedResponse.image_query || parsedResponse.name;
+      const imageUrl = await fetchImage(imageQuery);
+
+      setCropDetails({ ...parsedResponse, image: imageUrl });
     } catch (error) {
-      console.error("Error fetching chatbot response:", error);
-      setError("Failed to fetch response. Please try again.");
+      console.error("Error fetching or parsing AI response:", error);
+      setError("Failed to fetch valid response. Please try again.");
     } finally {
       setLoading(false);
-    }
-  };
-
-  // Function to safely parse JSON
-  const parseJsonSafely = (str) => {
-    try {
-      return JSON.parse(str);
-    } catch (error) {
-      return null; // Return null if JSON is invalid
     }
   };
 
@@ -135,7 +126,7 @@ const WeatherAdvice = () => {
         AI Crop Details
       </h1>
       <p className="text-center text-base sm:text-lg text-black mb-6 sm:mb-8">
-        Find the best crops details with their maximum benefits.
+        Find the best crop details with their maximum benefits.
       </p>
 
       {/* Language Selector */}
@@ -148,11 +139,10 @@ const WeatherAdvice = () => {
           value={selectedLanguage}
           onChange={(selected) => setSelectedLanguage(selected)}
           placeholder="Search or Select Language"
-          className="react-select-container"
-          classNamePrefix="react-select"
         />
       </div>
 
+      {/* Input Field */}
       <div className="mb-6 flex flex-col sm:flex-row justify-center items-center">
         <input
           type="text"
@@ -170,29 +160,22 @@ const WeatherAdvice = () => {
         </button>
       </div>
 
-      {error && <p className="text-red-600 text-center text-sm sm:text-base">{error}</p>}
+      {error && <p className="text-red-600 text-center">{error}</p>}
 
+      {/* Display Crop Details */}
       {cropDetails && (
         <div className="mt-8 flex justify-center">
           <div className="bg-white shadow-lg rounded-lg p-4 transform transition duration-500 hover:scale-105 max-w-xs sm:max-w-md">
             <img
               src={cropDetails.image}
               alt={cropDetails.name}
-              className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
+              className="w-full h-40 object-cover rounded-t-lg"
             />
             <div className="p-4">
-              <h2 className="text-xl sm:text-2xl font-semibold text-black mb-2">
-                {cropDetails.name}
-              </h2>
-              <p className="text-sm sm:text-base text-gray-600 mb-1">
-                <strong>Optimal Weather:</strong> {cropDetails.weather}
-              </p>
-              <p className="text-sm sm:text-base text-gray-600 mb-1">
-                <strong>Benefits:</strong> {cropDetails.benefits}
-              </p>
-              <p className="text-sm sm:text-base text-gray-600">
-                <strong>Description:</strong> {cropDetails.description}
-              </p>
+              <h2 className="text-xl font-semibold mb-2">{cropDetails.name}</h2>
+              <p><strong>Optimal Weather:</strong> {cropDetails.weather}</p>
+              <p><strong>Benefits:</strong> {cropDetails.benefits}</p>
+              <p><strong>Description:</strong> {cropDetails.description}</p>
             </div>
           </div>
         </div>
