@@ -10,27 +10,31 @@ import {
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500">
-      {/* Main Section */}
-      <main className="container mx-auto flex flex-col md:flex-row items-center justify-center p-6 sm:p-10 text-center md:text-left">
-        <div className="w-full md:w-1/2 space-y-4 sm:space-y-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">
-            Revolutionize Your Farming Experience with AgroAI
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-black">
-            AgroAI is an AI-powered solution designed to assist farmers in making smarter decisions about their crops, weather, and plant health.
-          </p>
-          <p className="text-sm sm:text-base md:text-lg text-black">
-            Get personalized advice, diagnose diseases, and optimize your yield using cutting-edge technology. With AgroAI, sustainable farming is at your fingertips.
-          </p>
-        </div>
-        <div className="w-full md:w-1/2 mt-6 md:mt-0">
-          <img
-            src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-            alt="Farming field"
-            className="w-full h-auto rounded-lg shadow-lg"
-          />
-        </div>
-      </main>
+      {/* Main Section with Image Background */}
+      <main
+  className="relative flex flex-col md:flex-row items-center justify-between p-6 sm:p-10 text-center md:text-left bg-cover bg-center h-screen"
+  style={{
+    backgroundImage:
+      'url("https://world-coal-assets.s3.eu-west-1.amazonaws.com/wp-content/uploads/2023/12/17130044/agriculture-1.png")',
+  }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black opacity-40"></div>
+
+  {/* Content */}
+  <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+      Revolutionize Your Farming Experience with AgroAI
+    </h2>
+    <p className="text-sm sm:text-base md:text-lg">
+      AgroAI is an AI-powered solution designed to assist farmers in making smarter decisions about their crops, weather, and plant health.
+    </p>
+    <p className="text-sm sm:text-base md:text-lg">
+      Get personalized advice, diagnose diseases, and optimize your yield using cutting-edge technology. With AgroAI, sustainable farming is at your fingertips.
+    </p>
+  </div>
+</main>
+
 
       {/* Features Section */}
       <section className="bg-white py-12 sm:py-16 px-2">
@@ -39,54 +43,57 @@ const HomePage = () => {
             Try Our Services
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-            <Link
-              to="/chatbot"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
-            >
-              <ChatBubbleOvalLeftEllipsisIcon className="w-12 h-12 text-green-600 mx-auto" />
-              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
-                AI-Powered Chatbot
-              </h4>
-              <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
-                Get real-time advice tailored to your crop needs. Just ask our intelligent chatbot powered by LLaMA 3.2!
-              </p>
-            </Link>
-            <Link
-              to="/weather"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
-            >
-              <CloudIcon className="w-12 h-12 text-green-600 mx-auto" />
-              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
-                Weather-Based Crop Advice
-              </h4>
-              <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
-                Know which crops thrive in your local climate and adjust your planting strategies accordingly for optimal results.
-              </p>
-            </Link>
-            <Link
-              to="/diagnosis"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
-            >
-              <ShieldCheckIcon className="w-12 h-12 text-green-600 mx-auto" />
-              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
-                Disease Diagnosis
-              </h4>
-              <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
-                Upload an image of your crop and let our AI diagnose any diseases with suggestions for the next steps.
-              </p>
-            </Link>
-            <Link
-              to="/locationBasedRecommendation"
-              className="block bg-green-50 p-4 sm:p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
-            >
-              <MapPinIcon className="w-12 h-12 text-green-600 mx-auto" />
-              <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700">
-                Location-Based Crop Advice
-              </h4>
-              <p className="mt-2 sm:mt-4 text-sm sm:text-base text-black">
-                Get crop recommendations based on your location's soil, climate, and weather conditions.
-              </p>
-            </Link>
+            {[
+              {
+                to: "/chatbot",
+                Icon: ChatBubbleOvalLeftEllipsisIcon,
+                title: "AI-Powered Chatbot",
+                description: "Get real-time advice tailored to your crop needs.",
+              },
+              {
+                to: "/weather",
+                Icon: CloudIcon,
+                title: "Weather-Based Crop Advice",
+                description:
+                  "Know which crops thrive in your local climate.",
+              },
+              {
+                to: "/diagnosis",
+                Icon: ShieldCheckIcon,
+                title: "Disease Diagnosis",
+                description:
+                  "Upload an image to diagnose crop diseases.",
+              },
+              {
+                to: "/locationBasedRecommendation",
+                Icon: MapPinIcon,
+                title: "Location-Based Crop Advice",
+                description:
+                  "Get recommendations based on your location.",
+              },
+            ].map((feature, index) => (
+              <Link
+                key={index}
+                to={feature.to}
+                className="relative group block bg-gradient-to-br from-green-100 to-green-200 p-4 sm:p-6 rounded-lg shadow-lg transform transition-transform hover:-translate-y-2 hover:shadow-2xl"
+              >
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-green-500 to-green-600 opacity-0 group-hover:opacity-50 transition duration-500 blur-lg rounded-lg"></div>
+
+                <div className="relative flex flex-col items-center text-center">
+                  <feature.Icon className="w-16 h-16 text-green-600 group-hover:scale-110 transition-transform duration-300" />
+                  <h4 className="mt-4 text-lg sm:text-xl font-semibold text-green-700 group-hover:text-green-900 transition duration-300">
+                    {feature.title}
+                  </h4>
+                  <p className="mt-2 text-sm sm:text-base text-black">
+                    {feature.description}
+                  </p>
+                  <button className="mt-4 bg-green-700 text-white px-4 py-2 rounded-full shadow-lg group-hover:bg-green-900 transition duration-300">
+                    Learn More
+                  </button>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
