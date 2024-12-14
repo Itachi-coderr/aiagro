@@ -104,7 +104,7 @@ const AutoLocationCropRecommendation = () => {
         messages: [
           {
             role: "user",
-            content: `Given the location: ${location}, recommend suitable fruits and vegetables for cultivation. Provide your response entirely in ${selectedLanguage.value}. Provide concise names and helpful information.`,
+            content: `Given the location: ${location}, recommend suitable fruits and vegetables for cultivation. Use proper markdown formatting such as headings, bullet points, and bold text to make the response structured and clear. Provide your response entirely in ${selectedLanguage.value}. Include concise names and useful information.`,
           },
         ],
         temperature: 0.5,
@@ -121,6 +121,7 @@ const AutoLocationCropRecommendation = () => {
       setLoading(false);
     }
   };
+  
   
 
   return (
