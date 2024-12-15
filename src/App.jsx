@@ -20,7 +20,7 @@ function App() {
             <Link className="text-2xl font-bold" to="/">AgroAI</Link>
 
             {/* Navbar links */}
-            <nav className="hidden md:flex space-x-12 ml-auto">
+            <nav className="hidden md:flex space-x-12">
               <Link to="/" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Home</Link>
               <Link to="/chatbot" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Chatbot</Link>
               <Link to="/weather" className="text-lg transform transition duration-300 hover:text-green-400 hover:scale-110">Crops Details</Link>
