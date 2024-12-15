@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div>
         <header className="py-4 bg-gray-800 text-white">
-          <div className="container flex justify-between items-center px-2 p-8 fixed">
+          <div className="container mx-auto flex justify-between items-center px-2 p-8 fixed">
             {/* Simplified AgroAI title */}
             <Link className="text-2xl font-bold" to="/">AgroAI</Link>
 
