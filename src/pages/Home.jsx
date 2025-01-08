@@ -20,38 +20,38 @@ const HomePage = () => {
     <div className="min-h-screen bg-gradient-to-r from-green-100 via-green-300 to-green-500">
       {/* Main Section with Image Background */}
       <main
-  className="relative flex flex-col md:flex-row items-center justify-between p-6 sm:p-10 text-center md:text-left bg-cover bg-center h-screen"
-  style={{
-    backgroundImage:
-      'url("https://world-coal-assets.s3.eu-west-1.amazonaws.com/wp-content/uploads/2023/12/17130044/agriculture-1.png")',
-  }}
->
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-black opacity-40"></div>
+        className="relative flex flex-col md:flex-row items-center justify-between p-6 sm:p-10 text-center md:text-left bg-cover bg-center h-screen"
+        style={{
+          backgroundImage:
+            'url("https://world-coal-assets.s3.eu-west-1.amazonaws.com/wp-content/uploads/2023/12/17130044/agriculture-1.png")',
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black opacity-40"></div>
 
-  {/* Content */}
-  <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white bottom-5">
-    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-      Revolutionize Your Farming Experience with AgroAI
-    </h2>
-    <p className="text-sm sm:text-base md:text-lg">
-      AgroAI is an AI-powered solution designed to assist farmers in making smarter decisions about their crops, weather, and plant health.
-    </p>
-    <p className="text-sm sm:text-base md:text-lg">
-      Get personalized advice, diagnose diseases, and optimize your yield using cutting-edge technology. With AgroAI, sustainable farming is at your fingertips.
-    </p>
-  </div>
+        {/* Content */}
+        <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white bottom-5">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+            Revolutionize Your Farming Experience with AgroAI
+          </h2>
+          <p className="text-sm sm:text-base md:text-lg">
+            AgroAI is an AI-powered solution designed to assist farmers in making smarter decisions about their crops, weather, and plant health.
+          </p>
+          <p className="text-sm sm:text-base md:text-lg">
+            Get personalized advice, diagnose diseases, and optimize your yield using cutting-edge technology. With AgroAI, sustainable farming is at your fingertips.
+          </p>
+        </div>
 
-  {/* Explore More Button */}
-  <div className="absolute bottom-40 w-full text-center">
-    <button
-      onClick={scrollToServices}
-      className="px-6 py-3 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-900 transition duration-300"
-    >
-      Explore More
-    </button>
-  </div>
-</main>
+        {/* Explore More Button */}
+        <div className="absolute bottom-40 w-full text-center">
+          <button
+            onClick={scrollToServices}
+            className="px-6 py-3 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-900 transition duration-300"
+          >
+            Explore More
+          </button>
+        </div>
+      </main>
 
 
 
@@ -119,7 +119,8 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 py-6 sm:py-8 text-center text-gray-400 text-sm sm:text-base">
-        <p>&copy; 2024 AgroAI. All rights reserved.</p>
+        <p>&copy; 2025 AgroAI. All rights reserved.</p>
+        <p>Developed by Tauqeer Tariq</p>
       </footer>
     </div>
   );
