@@ -120,7 +120,6 @@ const HomePage = () => {
       {/* Footer */}
       <footer className="bg-gray-800 py-6 sm:py-8 text-center text-gray-400 text-sm sm:text-base">
         <p>&copy; 2025 AgroAI. All rights reserved.</p>
-        <p>Developed by Tauqeer Tariq</p>
       </footer>
     </div>
   );
