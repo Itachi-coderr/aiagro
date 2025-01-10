@@ -4,67 +4,93 @@ import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import Select from "react-select"; // Import react-select for searchable dropdown
+import Select from "react-select";
 
 const groq = new Groq({
   apiKey: "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",
   dangerouslyAllowBrowser: true,
 });
 
+// Simulated database of diseases for fruit/vegetable names
+const simulatedDatabase = [
+  { fruit: "Tomato", disease: "Early Blight" },
+  { fruit: "Grapes", disease: "Downy Mildew" },
+  { fruit: "Apple", disease: "Scab" },
+];
+
 const DiseaseDiagnosis = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [diagnosis, setDiagnosis] = useState("");
   const [loading, setLoading] = useState(false);
   const [fruitName, setFruitName] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState({ label: "English", value: "English" }); // Default language
+  const [selectedLanguage, setSelectedLanguage] = useState({ label: "English", value: "English" });
 
-  // Supported languages with labels for react-select
   const languages = [
     { value: "English", label: "English" },
-    { value: "Urdu", label: "Urdu (\u0627\u0631\u062f\u0648)" },
-    { value: "Punjabi", label: "Punjabi (\u067e\u0646\u062c\u0627\u0628\u06cc)" },
-    { value: "Sindhi", label: "Sindhi (\u0633\u0646\u068c\u064a)" },
-    { value: "Pashto", label: "Pashto (\u067e\u069a\u062a\u0648)" },
-    { value: "Balochi", label: "Balochi (\u0628\u0644\u0648\u0686\u06cc)" },
-    { value: "Spanish", label: "Spanish (Espa\u00f1ol)" },
-    { value: "French", label: "French (Fran\u00e7ais)" },
-    { value: "Chinese", label: "Chinese (\u7b80\u4f53\u4e2d\u6587)" },
+    { value: "Urdu", label: "Urdu (اردو)" },
+    { value: "Punjabi", label: "Punjabi (پنجابی)" },
+    { value: "Sindhi", label: "Sindhi (سنڌي)" },
+    { value: "Pashto", label: "Pashto (پښتو)" },
+    { value: "Balochi", label: "Balochi (بلوچی)" },
+    { value: "Saraiki", label: "Saraiki (سرائیکی)" },
+    { value: "Arabic", label: "Arabic (العربية)" },
+    { value: "Hindi", label: "Hindi (हिन्दी)" },
+    { value: "Bengali", label: "Bengali (বাংলা)" },
+    { value: "French", label: "French (Français)" },
+    { value: "German", label: "German (Deutsch)" },
+    { value: "Chinese (Simplified)", label: "Chinese (Simplified) (简体中文)" },
+    { value: "Chinese (Traditional)", label: "Chinese (Traditional) (繁體中文)" },
+    { value: "Spanish", label: "Spanish (Español)" },
+    { value: "Portuguese", label: "Portuguese (Português)" },
+    { value: "Russian", label: "Russian (Русский)" },
+    { value: "Turkish", label: "Turkish (Türkçe)" },
+    { value: "Persian", label: "Persian (فارسی)" },
+    { value: "Malay", label: "Malay (Bahasa Melayu)" },
+    { value: "Tamil", label: "Tamil (தமிழ்)" },
+    { value: "Telugu", label: "Telugu (తెలుగు)" },
+    { value: "Korean", label: "Korean (한국어)" },
+    { value: "Japanese", label: "Japanese (日本語)" },
+    { value: "Italian", label: "Italian (Italiano)" },
+    { value: "Swahili", label: "Swahili (Kiswahili)" },
+    { value: "Dutch", label: "Dutch (Nederlands)" },
+    { value: "Thai", label: "Thai (ไทย)" },
+    { value: "Vietnamese", label: "Vietnamese (Tiếng Việt)" },
     // Add more languages as needed
   ];
 
-  // Drag and drop setup
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => setSelectedImage(acceptedFiles[0]),
     accept: "image/*",
   });
 
-  // Simulated Image Recognition API call with additional diseases
-  const analyzeImage = async (image) => {
-    const diseases = [
-      "Powdery mildew",
-      "Leaf spot",
-      "Root rot",
-      "Anthracnose",
-      "Blight",
-      "Rust disease",
-    ];
-    const randomIndex = Math.floor(Math.random() * diseases.length);
-    return diseases[randomIndex]; // Simulate detecting a random disease
+  const analyzeFromDatabase = (fruitName) => {
+    return simulatedDatabase.find((entry) => entry.fruit.toLowerCase() === fruitName.toLowerCase());
   };
 
   const handleSubmit = async () => {
-    if (!selectedImage || !fruitName) return;
+    if (!fruitName) {
+      setDiagnosis("Please enter the name of a fruit or vegetable.");
+      return;
+    }
 
     setLoading(true);
     try {
-      const disease = await analyzeImage(selectedImage);
+      const analysis = analyzeFromDatabase(fruitName);
+
+      if (!analysis) {
+        setDiagnosis(`No data found for "${fruitName}". Please try a different name.`);
+        setLoading(false);
+        return;
+      }
+
+      const { fruit, disease } = analysis;
 
       const chatCompletion = await groq.chat.completions.create({
         model: "llama-3.2-90b-vision-preview",
         messages: [
           {
             role: "user",
-            content: `The crop is a ${fruitName}, diagnosed with ${disease}. Provide a short, practical treatment suggestion in ${selectedLanguage.value}. Limit the response to 100 words.`,
+            content: `The crop is ${fruit}, diagnosed with ${disease}. Provide a short, practical treatment suggestion in English. Limit the response to 100 words.`,
           },
         ],
         temperature: 0.7,
@@ -73,7 +99,27 @@ const DiseaseDiagnosis = () => {
       });
 
       const aiResponse = chatCompletion.choices[0].message.content;
-      setDiagnosis(aiResponse);
+
+      // Translate the response if the selected language is not English
+      if (selectedLanguage.value !== "English") {
+        const translationCompletion = await groq.chat.completions.create({
+          model: "llama-3.2-90b-vision-preview",
+          messages: [
+            {
+              role: "user",
+              content: `Translate the following text to ${selectedLanguage.value}: "${aiResponse}"`,
+            },
+          ],
+          temperature: 0.5,
+          max_tokens: 150,
+          top_p: 1,
+        });
+
+        const translatedResponse = translationCompletion.choices[0].message.content;
+        setDiagnosis(translatedResponse);
+      } else {
+        setDiagnosis(aiResponse);
+      }
     } catch (error) {
       console.error("Error generating response:", error);
       setDiagnosis("Failed to get AI response. Please try again.");
@@ -101,7 +147,7 @@ const DiseaseDiagnosis = () => {
           />
         </div>
 
-        {/* Enhanced Language Selector */}
+        {/* Language Selector */}
         <div className="relative mb-6">
           <label
             htmlFor="language"
@@ -129,7 +175,7 @@ const DiseaseDiagnosis = () => {
             <div className="flex flex-col items-center">
               <FiUpload className="text-4xl text-gray-500 mb-2" />
               <p className="text-center text-gray-500">
-                Drag & Drop Image or Click to Select
+                Drag & Drop Image or Click to Select (Demo Only)
               </p>
             </div>
           ) : (
