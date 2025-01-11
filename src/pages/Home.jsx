@@ -30,7 +30,7 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-black opacity-40"></div>
 
         {/* Content */}
-        <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white ">
+        <div className="relative w-full md:w-1/2 space-y-4 sm:space-y-6 z-10 text-white bottom-15">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Revolutionize Your Farming Experience with AgroAI
           </h2>
